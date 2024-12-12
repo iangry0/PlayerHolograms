@@ -1,0 +1,23 @@
+name: PlayerHolograms
+version: '1.0-SNAPSHOT'
+main: me.iangry.playerholograms.HologramGUI
+api-version: '1.20'
+depend: [DecentHolograms]
+softdepend: [WorldGuard]
+commands:
+  hologramgui:
+    description: Opens the hologram GUI.
+    usage: /hologramgui
+    aliases:
+      - hologui
+      - hologramui
+      - holoui
+      - playerholograms
+      - playerhologram
+  playerhologramsplugin:
+    description: Plugin help
+    usage: /playerhologramsplugin
+permissions:
+  playerholograms.use:
+    default: op
+    description: Allows the player to use the HologramGUI command

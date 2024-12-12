@@ -1,0 +1,5 @@
+restrictedRegions:
+  - spawn
+bannedWords:
+  - badword1
+  - badword2
