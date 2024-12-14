@@ -75,7 +75,7 @@ public class HologramManager {
         player.sendMessage(ChatColor.GREEN + "Hologram deleted successfully!");
     }
 
-    public void updateHologramText(Player player, String hologramName, String[] lines) {
+    public void updateHologramLine(Player player, String hologramName, int lineIndex, String newText) {
         List<String> holograms = playerHolograms.getOrDefault(player.getUniqueId(), new ArrayList<>());
 
         if (!holograms.contains(hologramName)) {
@@ -83,25 +83,34 @@ public class HologramManager {
             return;
         }
 
-        // Check banned words
+        // Check for banned words
         List<String> bannedWords = config.getStringList("bannedWords");
-        for (String line : lines) {
-            for (String bannedWord : bannedWords) {
-                if (line.contains(bannedWord)) {
-                    player.sendMessage(ChatColor.RED + "This hologram contains a banned word.");
-                    return;
-                }
+        for (String bannedWord : bannedWords) {
+            if (newText.contains(bannedWord)) {
+                player.sendMessage(ChatColor.RED + "This hologram contains a banned word.");
+                return;
             }
+        }
+
+        List<String> lines = getHologramLines(hologramName);
+        if (lineIndex < lines.size()) {
+            lines.set(lineIndex, newText);
+        } else {
+            for (int i = lines.size(); i <= lineIndex; i++) {
+                lines.add("");
+            }
+            lines.set(lineIndex, newText);
         }
 
         Location location = deserializeLocation(config.getString("hologramDetails." + hologramName + ".location"));
         DHAPI.removeHologram(hologramName);
-        DHAPI.createHologram(hologramName, location, Arrays.asList(lines));
+        DHAPI.createHologram(hologramName, location, lines);
 
-        saveHologramDetails(hologramName, location, lines);
+        saveHologramDetails(hologramName, location, lines.toArray(new String[0]));
         saveHolograms();
         player.sendMessage(ChatColor.GREEN + "Hologram updated successfully!");
     }
+
 
     public List<String> listHolograms(Player player) {
         List<String> holograms = playerHolograms.getOrDefault(player.getUniqueId(), new ArrayList<>());

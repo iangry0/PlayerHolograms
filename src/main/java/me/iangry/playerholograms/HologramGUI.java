@@ -3,6 +3,7 @@ package me.iangry.playerholograms;
 import me.iangry.playerholograms.commands.HologramCommand;
 import me.iangry.playerholograms.commands.PlayerHologramsPlugin;
 import me.iangry.playerholograms.gui.GUIListener;
+import me.iangry.playerholograms.gui.HologramEditLineGUI;
 import me.iangry.playerholograms.gui.HologramListGUI;
 import me.iangry.playerholograms.hologram.HologramManager;
 import me.iangry.playerholograms.utils.AnvilManager;
@@ -31,6 +32,8 @@ public class HologramGUI extends JavaPlugin {
         PluginManager pm = Bukkit.getPluginManager();
         pm.registerEvents(new GUIListener(hologramManager, anvilManager), this);
         pm.registerEvents(new HologramListGUI(hologramManager, anvilManager), this);
+        pm.registerEvents(new HologramEditLineGUI(hologramManager, anvilManager), this);
+
 
 
         getLogger().info("PlayerHolograms Plugin Enabled!");

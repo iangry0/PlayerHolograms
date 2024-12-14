@@ -22,6 +22,7 @@ public class PlayerHologramsPlugin implements CommandExecutor {
                 plugin.reloadConfig();
                 plugin.saveConfig();
 
+
                 // Feedback to the player
                 sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&2[&aPlayerHolograms&2]"));
                 sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&aReload Complete"));

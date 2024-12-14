@@ -22,7 +22,7 @@ public class AnvilManager {
                 .onClick((slot, stateSnapshot) -> {
                     if (slot == AnvilGUI.Slot.OUTPUT) {
                         String text = stateSnapshot.getText();
-                        player.sendMessage(ChatColor.GREEN + "Input received: " + text);
+                        player.sendMessage(ChatColor.GREEN + "Input received: " + ChatColor.translateAlternateColorCodes('&', text));
 
                         // Split the text into multiple lines if necessary
                         String[] lines = text.split("\n");
